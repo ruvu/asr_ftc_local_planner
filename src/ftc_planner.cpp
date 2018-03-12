@@ -49,8 +49,6 @@ namespace ftc_local_planner
         dynamic_reconfigure::Server<FTCPlannerConfig>::CallbackType cb = boost::bind(&FTCPlanner::reconfigureCB, this, _1, _2);
         dsrv_->setCallback(cb);
 
-        joinCostmap_ = new JoinCostmap();
-
         ROS_INFO("FTCPlanner: Version 2 Init.");
     }
 
@@ -72,11 +70,6 @@ namespace ftc_local_planner
         bool first_use = false;
         if(first_setPlan_)
         {
-            if(config_.join_obstacle){
-                //init joincostmap with local an global costmap.
-                joinCostmap_->initialize(costmap_ros_, global_costmap_ros_);
-            }
-
             first_setPlan_ = false;
             ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),old_goal_pose_,global_plan_.size()-1);
             first_use = true;
@@ -112,10 +105,6 @@ namespace ftc_local_planner
         tf::Stamped<tf::Pose> current_pose;
         costmap_ros_->getRobotPose(current_pose);
 
-        //Join the actual global an local costmap in the global costmap.
-        if(config_.join_obstacle){
-            joinCostmap_->joinMaps();
-        }
         int max_point = 0;
         //First part of the routine. Rotatio to the first global plan orientation.
         if(rotate_to_global_plan_)

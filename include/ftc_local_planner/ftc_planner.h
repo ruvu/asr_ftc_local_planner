@@ -34,7 +34,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 #include <ftc_local_planner/transform_global_plan.h>
 
-#include <ftc_local_planner/join_costmap.h>
 
 namespace ftc_local_planner
 {
@@ -169,8 +168,6 @@ namespace ftc_local_planner
         double cmd_vel_linear_x_;
         //rotation velocity of previous round for the dirveToward methode
         double cmd_vel_angular_z_;
-
-        JoinCostmap *joinCostmap_;
 
     };
 };
