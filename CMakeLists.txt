@@ -42,8 +42,7 @@ catkin_package(
 
 add_library(asr_ftc_local_planner 
 	    src/ftc_planner.cpp
-	    src/transform_global_plan.cpp
-	    src/join_costmap.cpp)
+	    src/transform_global_plan.cpp)
 target_link_libraries(asr_ftc_local_planner ${catkin_LIBRARIES})
 add_dependencies(asr_ftc_local_planner asr_ftc_local_planner_gencfg)
 add_dependencies(asr_ftc_local_planner nav_msgs_gencpp)
